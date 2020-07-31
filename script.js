@@ -20,7 +20,6 @@ var submitBtn = document.querySelector('.btn-info')
 
 
 
-
 document.addEventListener('DOMContentLoaded', function() {
 
 
@@ -40,8 +39,9 @@ submitBtn.addEventListener("click", function (event){
             console.log(json)
             // Create all elements to put weather info in
             var city = json.name;
+            var date =moment().format("MM/DD/YY")
             var cityTitle = document.createElement('h2');
-            cityTitle.textContent=`Weather for ${ city  }`;
+            cityTitle.textContent=`Weather for ${ city  } on ${date}`;
             weatherDiv.append(cityTitle);
 
             var temp = json.main.temp;
@@ -64,7 +64,7 @@ submitBtn.addEventListener("click", function (event){
 
             var lat=json.coord.lat;
             var lon=json.coord.lon;
-            fetch(`http:api.openweathermap.org/data/2.5/uvi?appid=${ key }&lat=${ lat }&lon=${ lon }`)
+            fetch(`http://api.openweathermap.org/data/2.5/uvi?appid=${ key }&lat=${ lat }&lon=${ lon }`)
                 .then(function(response) {
                 return response.json();
             })
@@ -73,12 +73,42 @@ submitBtn.addEventListener("click", function (event){
 
                 var uv=jsonUV.value;
                 var uvDisp=document.createElement('h3');
-                uvDisp.textContent=`UV index ${uv}mW/m2`;
+                uvDisp.textContent=`UV index:${uv}`;
                 weatherDiv.append(uvDisp);
+            
+            fetch (`http://api.openweathermap.org/data/2.5/forecast?q=${searchElm.value}&appid=${key}`)
+                .then(function(response){
+                    return response.json();
+        
+                })
+                .then(function(json5Day){
+                console.log(json5Day, "5day");
+
+                var locationIcon=document.querySelector('.weather-icon');
+                var icon=json5Day.list[0].weather[0].icon
+                console.log(icon, "icon code")
+                // var iconDisp=document.createElement('img');
+                locationIcon.innerHTML=`<img src="icons/${icon}.png">`;
+
+
+
+
+
+
+
+                })
+            
+            
+            
+            
+            
+            
+            
+            
             })
         })
 
-
+   
 
     
     
