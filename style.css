@@ -43,14 +43,38 @@
 }
 
 .grid{
-    display:grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    display:inline-grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-gap: 1rem;
+    padding: 1rem;
+    margin: 1rem;
 }
 
 .grid > div {
-    background-image: linear-gradient(to bottom right,#191970, #8b008b);
+    background-image: linear-gradient(to bottom right,#99ccff, #9999ff);
     padding: 1.5 rem;
     border-radius: 1rem;
 
+}
+
+.red {
+    color: red;
+    text-emphasis: bold;
+}
+
+.green {
+    color: green;
+   
+    
+}
+
+.yellow {
+    color: #cccc00;
+    text-shadow: gray;
+   
+}
+
+.orange {
+    color:orangered;
+    
 }
